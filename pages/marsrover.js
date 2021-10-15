@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Card, Grid, Image, Container, Message } from "semantic-ui-react";
+import { Grid, Image, Container, Message } from "semantic-ui-react";
 import RoverCard from '../components/RoverCard';
 import Layout from '../components/Layout';
 
@@ -42,8 +42,6 @@ const marsRover = () => {
         e.preventDefault();
         // set the rover name
         const lowercaseName = name.toLowerCase();
-        // console.log(lowercaseName)
-
 
         // tell user that you are waiting on results
         setLoading(true)
@@ -56,9 +54,8 @@ const marsRover = () => {
 
         // Get the data back from nasaAPI
         const { data } = await response.json();
-        // console.log(data)
-        setRover(data)
-        console.log(Object.keys(data))
+        setRover(data.photos)
+
 
         // Reset the loading message if data is returned
         if (data) {
@@ -66,7 +63,7 @@ const marsRover = () => {
         }
     }
 
-    console.log("RoverData", rover)
+
 
     // Mapping through the above roverInfo array and returning the JSX the way we want to view it
     let roverArray = roverInfo.map(function (rover) {
@@ -78,7 +75,23 @@ const marsRover = () => {
     })
 
 
+    // If the rover data is returned, display it below
+    const displayResults = (data) => {
+        if (rover != undefined) {
+            const test = rover.map(function (r) {
 
+                const altText = `Image of ${r.rover.name} taken on ${r.earth_date}`
+                return (
+                    <Grid.Column key={r.id} >
+                        <Image size="small" src={r.img_src} alt={altText} />
+                    </Grid.Column>
+
+                )
+            });
+
+            return test;
+        }
+    }
 
 
     return (
@@ -92,10 +105,12 @@ const marsRover = () => {
                     </Grid.Row>
                 </Grid>
             </Container>
-            <Container>
-
-                {/* <Message>{loading ? "Please Wait" : null}</Message> */}
-                {JSON.stringify(rover)}
+            <Container style={{ marginTop: '10px' }}>
+                <Grid>
+                    <Grid.Row columns={5}>
+                        {displayResults(rover)}
+                    </Grid.Row>
+                </Grid>
             </Container>
         </>
 
