@@ -5,9 +5,10 @@ const RoverCard = ({ img, size, name, description, handleClick }) => {
     return (
         <Card>
             <a>
-                <Image alt={name} src={img} size={size} onClick={(event) => {
-                    handleClick(event, name)
-                }} />
+                <Image alt={name} src={img} width={300}
+                    height={200} onClick={(event) => {
+                        handleClick(event, name)
+                    }} />
             </a>
             <Card.Content>
                 <Card.Header>{name}</Card.Header>

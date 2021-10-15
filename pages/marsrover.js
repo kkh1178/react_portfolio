@@ -98,7 +98,7 @@ const marsRover = () => {
         <>
             <Layout></Layout>
             <Container>
-                <h2 style={{ textAlign: "center", marginTop: '10px' }}>Which rover images would you like to see?</h2>
+                <h1 style={{ textAlign: "center", marginTop: '10px' }}>Which rover images would you like to see?</h1>
                 <Grid>
                     <Grid.Row columns={3}>
                         {roverArray}
@@ -108,6 +108,7 @@ const marsRover = () => {
             <Container style={{ marginTop: '10px' }}>
                 <Grid>
                     <Grid.Row columns={5}>
+
                         {displayResults(rover)}
                     </Grid.Row>
                 </Grid>
