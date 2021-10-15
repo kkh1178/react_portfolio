@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Container } from 'semantic-ui-react'
 import Picture from "../components/Picture";
 import Layout from '../components/Layout';
 
@@ -15,15 +14,13 @@ export async function getStaticProps() {
 }
 // Had to detructure data first before passing down to component
 const nasaImage = ({ data }) => {
-    console.log(Object.keys(data))
-
     const { copyright, date, explanation, hdurl, media_type, service_version, title, url } = data
     console.log(url)
 
     return (
         <>
             <Layout></Layout>
-            <Picture image={url} text={explanation} credit={copyright}></Picture>
+            <Picture title={title} image={url} text={explanation} credit={copyright}></Picture>
         </>
     )
 }
