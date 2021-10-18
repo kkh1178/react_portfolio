@@ -79,13 +79,7 @@ const marsRover = () => {
             <Container style={{ marginTop: '10px' }}>
                 <Grid>
                     {/* if loading is true, show the loading message; if not, display results */}
-                    {loading ? <Message icon>
-                        <Icon name={'circle notch'} loading />
-                        "Loading"
-                    </Message> :
-                        <Grid.Row columns={5}>
-                            {displayResults(rover)}
-                        </Grid.Row>}
+                    {loading ? <Message icon><Icon name={'circle notch'} loading />"Loading"</Message> : <Grid.Row columns={5}>{displayResults(rover)}</Grid.Row>}
 
                 </Grid>
             </Container>
