@@ -1,38 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { Grid, Image, Container, Message } from "semantic-ui-react";
+import { Grid, Container, Message, Icon } from "semantic-ui-react";
+
 import RoverCard from '../components/RoverCard';
 import Layout from '../components/Layout';
+import DisplayResult from '../components/DisplayResult';
+// Created an array of objects with information about the three rovers 
+import roverInfo from '../components/helperfunctions/roverInfo';
 
 
 
 const marsRover = () => {
-
-    // Created an array of objects with information about the three rovers that have images on NASA API.
-    const roverInfo = [
-        {
-            "name": "Curiosity",
-            "key": 1,
-            "img": "/img/pia23378-16.jpeg",
-            "size": "medium",
-            "description": "NASA's Curiosity rover took this selfie on Oct. 11, 2019, the 2,553rd Martian day, or sol, of its mission."
-
-        },
-        {
-            "name": "Opportunity",
-            "key": 2,
-            "img": "/img/pia20852_sol4501b_p2449_1_l257f.jpeg",
-            "size": "medium",
-            "description": "This scene from the panoramic camera (Pancam) on NASA's Mars Exploration Rover Opportunity shows 'Spirit Mound' overlooking the floor of Endeavour Crater"
-        },
-        {
-            "name": "Spirit",
-            "key": 3,
-            "img": "/img/156151main_image_feature_645_ys_full.jpeg",
-            "size": "medium",
-            "description": "As the Mars Exploration Rover Spirit began collecting images for a 360-degree panorama of new terrain, the rover captured this view of a dark boulder with an interesting surface texture."
-        }
-    ]
-
     // Setting state for the rover name for the API call
     const [rover, setRover] = useState();
     const [loading, setLoading] = useState(false);
@@ -63,8 +40,6 @@ const marsRover = () => {
         }
     }
 
-
-
     // Mapping through the above roverInfo array and returning the JSX the way we want to view it
     let roverArray = roverInfo.map(function (rover) {
         return (
@@ -77,26 +52,22 @@ const marsRover = () => {
 
     // If the rover data is returned, display it below
     const displayResults = (data) => {
+        // Make sure that the data exists first
         if (rover != undefined) {
-            const test = rover.map(function (r) {
-
-                const altText = `Image of ${r.rover.name} taken on ${r.earth_date}`
+            const display = rover.map(function (r) {
                 return (
-                    <Grid.Column key={r.id} >
-                        <Image size="small" src={r.img_src} alt={altText} />
-                    </Grid.Column>
-
+                    <DisplayResult name={r.name} date={r.earth_date} id={r.id} img={r.img_src} />
                 )
             });
-
-            return test;
+            return display;
         }
     }
 
 
+
     return (
         <>
-            <Layout></Layout>
+            <Layout />
             <Container>
                 <h1 style={{ textAlign: "center", marginTop: '10px' }}>Which rover images would you like to see?</h1>
                 <Grid>
@@ -107,10 +78,15 @@ const marsRover = () => {
             </Container>
             <Container style={{ marginTop: '10px' }}>
                 <Grid>
-                    <Grid.Row columns={5}>
+                    {/* if loading is true, show the loading message; if not, display results */}
+                    {loading ? <Message icon>
+                        <Icon name={'circle notch'} loading />
+                        "Loading"
+                    </Message> :
+                        <Grid.Row columns={5}>
+                            {displayResults(rover)}
+                        </Grid.Row>}
 
-                        {displayResults(rover)}
-                    </Grid.Row>
                 </Grid>
             </Container>
         </>

@@ -11,8 +11,11 @@ export default async function handler(req, res) {
   // Check for a POST state ment and then query the NASA API
   if (req.method === 'POST') {
 
+    let num = Math.floor(Math.random() * (100 + 1))
+    console.log(num)
+
     // building the URL
-    const url = `https://api.nasa.gov/mars-photos/api/v1/rovers/${name}/photos?sol=1&page=1&api_key=${process.env.NASA_KEY}`;
+    const url = `https://api.nasa.gov/mars-photos/api/v1/rovers/${name}/photos?sol=${num}&page=1&api_key=${process.env.NASA_KEY}`;
     console.log("url", url)
 
 
@@ -23,6 +26,7 @@ export default async function handler(req, res) {
       });
 
       const data = await response.json()
+      console.log(data)
       return data;
     }
 

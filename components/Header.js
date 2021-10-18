@@ -10,7 +10,7 @@ const Header = () => {
                     <Menu.Item name="Home" />
                 </a>
             </Link>
-            <Link href="/nasaImage">
+            <Link href="/nasaimage">
                 <a>
                     <Menu.Item name="Daily NASA Pic" />
                 </a>
