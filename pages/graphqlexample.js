@@ -1,5 +1,7 @@
 import React from 'react';
-import request, { gql, GraphQLClient } from 'graphql-request';
+import { gql, GraphQLClient } from 'graphql-request';
+import { Grid, Container, Image } from "semantic-ui-react";
+import Layout from "../components/Layout";
 
 export const getStaticProps = async () => {
     const url = process.env.GRAPHCMS_URL;
@@ -39,16 +41,28 @@ export const getStaticProps = async () => {
 
 const graphQlExample = ({ images }) => {
 
-
     const imageArray = images.map(function (img) {
-        console.log("image array", img.id)
-    })
 
+        return (
+            <Grid.Column>
+                <Image style={{ marginTop: '5px', width: "357px", height: "238px" }} id={img.id} src={img.jpeg.url} alt={img.description} ></Image>
+            </Grid.Column>
+        )
+    })
 
     return (
         <div>
-            <h4>Using GraphCMS, I created an API of space themed images and queried the api using graphql.</h4>
-            {imageArray}
+            <Layout />
+            <Container>
+                <h4 style={{ marginTop: '10px', textAlign: "center" }}>
+                    Using GraphCMS, I created an API of space themed images then returned the data I wanted using graphql.
+                </h4>
+                <Grid>
+                    <Grid.Row columns={3}>
+                        {imageArray}
+                    </Grid.Row>
+                </Grid>
+            </Container>
         </div>
     )
 }
