@@ -20,6 +20,12 @@ const Header = () => {
                     <Menu.Item name="Mars Rover Pics" />
                 </a>
             </Link>
+            <Link href="/graphqlexample">
+                <a>
+                    <Menu.Item name="GraphQL Example" />
+                </a>
+            </Link>
+
         </Menu>
     )
 }
