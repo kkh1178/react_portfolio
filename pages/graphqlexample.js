@@ -2,6 +2,7 @@ import React from 'react';
 import { gql, GraphQLClient } from 'graphql-request';
 import { Grid, Container, Image } from "semantic-ui-react";
 import Layout from "../components/Layout";
+import Link from 'next/link';
 
 export const getStaticProps = async () => {
     const url = process.env.GRAPHCMS_URL;
@@ -42,10 +43,15 @@ export const getStaticProps = async () => {
 const graphQlExample = ({ images }) => {
 
     const imageArray = images.map(function (img) {
-
+        // console.log(img.slug)
+        const imgPage = `/images/${img.slug}`
         return (
             <Grid.Column>
-                <Image style={{ marginTop: '20px', width: "357px", height: "238px", objectFit: "cover" }} id={img.id} src={img.jpeg.url} alt={img.description} ></Image>
+                <Link href={imgPage}>
+                    <a>
+                        <Image style={{ marginTop: '20px', width: "357px", height: "238px", objectFit: "cover" }} id={img.id} src={img.jpeg.url} alt={img.description} ></Image>
+                    </a>
+                </Link>
             </Grid.Column>
         )
     })
