@@ -45,7 +45,7 @@ const graphQlExample = ({ images }) => {
 
         return (
             <Grid.Column>
-                <Image style={{ marginTop: '5px', width: "357px", height: "238px" }} id={img.id} src={img.jpeg.url} alt={img.description} ></Image>
+                <Image style={{ marginTop: '20px', width: "357px", height: "238px", objectFit: "cover" }} id={img.id} src={img.jpeg.url} alt={img.description} ></Image>
             </Grid.Column>
         )
     })
@@ -54,7 +54,7 @@ const graphQlExample = ({ images }) => {
         <div>
             <Layout />
             <Container>
-                <h4 style={{ marginTop: '10px', textAlign: "center" }}>
+                <h4 style={{ marginTop: '20px', textAlign: "center" }}>
                     Using GraphCMS, I created an API of space themed images then returned the data I wanted using graphql.
                 </h4>
                 <Grid>
